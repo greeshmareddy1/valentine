@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle, #ff4d6d, #590d22);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Comic Sans MS, Arial;
+}
+
+.container {
+    text-align: center;
+    z-index: 5;
+}
+
+h1 {
+    font-size: 42px;
+    color: #fff;
+    text-shadow: 0 0 10px pink,0 0 20px hotpink;
+}
+
+.buttons {
+    margin-top: 30px;
+}
+
+button {
+    padding: 15px 35px;
+    font-size: 22px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#yes {
+    background: #00ff99;
+}
+
+#no {
+    background: #ff0066;
+    position: absolute;
+}
+
+#msg {
+    margin-top: 25px;
+    font-size: 26px;
+    color: white;
+}
+
+/* Hearts */
+.heart {
+    position: absolute;
+    font-size: 28px;
+    animation: float 5s linear forwards;
+}
+
+@keyframes float {
+    from {transform: translateY(100vh);}
+    to {transform: translateY(-10vh);}
+}
+
+/* Confetti */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    from {transform: translateY(0);}
+    to {transform: translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+</audio>
+
+<div class="container">
+    <h1>💖 Will You Be My Valentine? 💖</h1>
+
+    <div class="buttons">
+        <button id="yes">YES 😍</button>
+        <button id="no">NO 😜</button>
+    </div>
+
+    <div id="msg"></div>
+</div>
+
+<script>
+const no = document.getElementById("no");
+const yes = document.getElementById("yes");
+const msg = document.getElementById("msg");
+
+no.addEventListener("mouseover", () => {
+    no.style.left = Math.random()*90 + "vw";
+    no.style.top = Math.random()*90 + "vh";
+});
+
+// YES clicked
+yes.onclick = () => {
+    msg.innerHTML = "🎉 YAYYY!! Now you're officially my Valentine 😍💍";
+    confetti();
+};
+
+// hearts
+function heart() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = Math.random() > 0.5 ? "❤️" : "💖";
+    h.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+}
+setInterval(heart,250);
+
+// confetti
+function confetti(){
+    for(let i=0;i<80;i++){
+        const c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),3000);
+    }
+}
+</script>
+
+</body>
+</html>
